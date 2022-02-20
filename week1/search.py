@@ -89,7 +89,24 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
     print("Query: {} Filters: {} Sort: {}".format(user_query, filters, sort))
 
     if user_query == "*":
-        return {
+        query = {
             "match_all": {}
         }
-    else {"match_all": {}}
+    else:
+        query = {
+            "match": {
+                "name": {
+                    "query": user_query
+                }
+            }
+        }
+    
+    query_obj = {
+        'size': 10,
+        "query": query,
+        "aggs": {
+            #TODO: FILL ME IN
+        }
+    }
+
+    return query_obj
